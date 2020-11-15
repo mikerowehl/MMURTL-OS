@@ -17,10 +17,10 @@
 
 */
 
-#define U32 unsigned long
-#define S32 long
-#define U16 unsigned int
-#define S16 int
+#define U32 unsigned int
+#define S32 int
+#define U16 unsigned short
+#define S16 short
 #define U8 unsigned char
 #define S8 char
 
@@ -28,8 +28,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "CM32.h"
-#include "Tokens32.h"
+#include "cm32.h"
+#include "tokens32.h"
 
 /* Input buffer & input pointer for preprocessed lines */
 char line_in[LINE_MAX], *input_ptr;
@@ -211,8 +211,8 @@ char zero_flag,
      stack_flag = 0;
 
 
-#include "Optimize.h"
-#include "Proto32.h"
+#include "optimize.h"
+#include "proto32.h"
 
 /******************************************
 * Determine if a character is alphabetic
@@ -285,7 +285,7 @@ static char skip_blanks(void)
 * Test for more macro parameters
 ****************************************/
 
-static long more_parms(void)
+static int more_parms(void)
 {
 	register char c;
 
@@ -360,7 +360,7 @@ static void copy_string(void)
 
 static U32 lookup_macro(char eflag)
 {
-	register long i;
+	register int i;
 	register char *name;
 
 	name = buffout_ptr;
@@ -380,7 +380,7 @@ static U32 lookup_macro(char eflag)
 static void resolve_macro(void)
 {
 	char *mptr, *ptr, *old_ptr;
-	long i;
+	int i;
 	register char c;
 
 	old_ptr = buffout_ptr;
@@ -415,7 +415,7 @@ static void resolve_macro(void)
 * Test for a string in input stream
 *****************************************/
 
-static unsigned long match(char *ptr)
+static unsigned int match(char *ptr)
 {
 	register char *ptr1;
 
@@ -491,7 +491,7 @@ static int compareT(char *ptable, int peep)
 * old points to last entry of buffer code to be replaced.
 *********************************************************/
 
-static void exchange(unsigned old, char *pnew)
+static void exchange(U16 old, char *pnew)
 {
 	char *ptr1, *ptr2;
 
@@ -517,7 +517,7 @@ static void exchange(unsigned old, char *pnew)
 * from the input file
 *****************************************/
 
-static long read_line(void)
+static int read_line(void)
 {
 char c, *sptr;
 
@@ -605,7 +605,7 @@ static void optimize(void)
  macro.
 *********************************************/
 
-static long readline(void)
+static int readline(void)
 {
 U32 i;
 char c, ch, fgotone;
@@ -4553,7 +4553,7 @@ static void compile(void)
 * Initialize I/O & execute compiler  MAIN MAIN MAIN
 *****************************************************/
 
-void main(S16 argc, char *argv[])
+void main(int argc, char *argv[])
 {
 	S16 i;
 	char *ptr, *pname;

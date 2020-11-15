@@ -102,6 +102,6 @@ static void put_num(U32  value, FILE *outfile);
 static void put_hex(U8 value, FILE *outfile);
 static void statement(U32  token);
 static void compile(void);
-void main(S16 argc, S8  *argv[]);
+void main(int argc, S8  *argv[]);
 
 /* END of PROTOTYPES  */
